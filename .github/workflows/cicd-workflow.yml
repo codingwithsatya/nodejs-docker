@@ -14,9 +14,9 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t codingwithsatya/nodejs-docker .
+        run: docker build -t satyapramodr/nodejs-docker .
       - name: Publish image to docker hub
-        run: docker push codingwithsatya/nodejs-docker:latest
+        run: docker push satyapramodr/nodejs-docker:latest
 
   deploys:
     needs: build
