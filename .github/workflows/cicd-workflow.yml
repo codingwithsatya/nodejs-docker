@@ -1,0 +1,30 @@
+name: CICD
+
+on:
+  push:
+    branches: ["main"]
+    
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t satyapramodr/nodejs-docker .
+      - name: Publish image to docker hub
+        run: docker push satyapramodr/nodejs-docker:latest
+
+  deploys:
+    needs: build
+    runs-on: [aws-ec2-runner]
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull codingwithsatya/nodejs-docker:latest
+      - name: Delete old container
+        run: docker rm -f nodejs-docker-container
+      - name: Run docker container
+        run: docker run -d -p 3000:3000 -name nodejs-docker-container codingwithsatya/nodejs-docker
