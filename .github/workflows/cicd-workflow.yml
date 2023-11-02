@@ -20,9 +20,9 @@ jobs:
 
   deploys:
     needs: build
-    runs-on: [aws-ec2-runner]
+    runs-on: [self-hosted]
     steps:
-      - name: Pull image from docker hub
+      - name: Pull image from docker hub and check
         run: docker pull codingwithsatya/nodejs-docker:latest
       - name: Delete old container
         run: docker rm -f nodejs-docker-container
