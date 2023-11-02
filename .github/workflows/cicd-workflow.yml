@@ -23,8 +23,8 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - name: Pull image from docker hub and check
-        run: docker pull codingwithsatya/nodejs-docker:latest
+        run: docker pull satyapramodr/nodejs-docker:latest
       - name: Delete old container
         run: docker rm -f nodejs-docker-container
       - name: Run docker container
-        run: docker run -d -p 3000:3000 -name nodejs-docker-container codingwithsatya/nodejs-docker
+        run: docker run -d -p 3000:3000 -name nodejs-docker-container satyapramodr/nodejs-docker
