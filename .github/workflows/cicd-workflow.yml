@@ -20,7 +20,7 @@ jobs:
 
   deploys:
     needs: build
-    runs-on: [actions-runner]
+    runs-on: [aws-ec2-runner]
     steps:
       - name: Pull image from docker hub
         run: docker pull satyapramodr/nodejs-docker:latest
